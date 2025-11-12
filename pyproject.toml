@@ -1,0 +1,56 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+  "mypy>=1.17.1",
+  "pre-commit>=4.3.0",
+  "pytest>=8.4.1",
+  "pytest-asyncio>=1.1.0",
+  "toml>=0.10.2"
+]
+
+[project]
+name = "vibe-ukis"
+version = "1.0.0"
+description = "vibe-ukis is a set of tools that are designed to help developers build working and reliable applications with LlamaIndex, llama-index-workflows and Chainlit."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "fastmcp>=2.11.3",
+  "html2text>=2024.2.26",
+  "httpx>=0.28.1",
+  "prompt-toolkit>=3.0.51",
+  "rich>=14.1.0",
+  "rich-gradient>=0.3.3"
+]
+
+[project.scripts]
+vibe-ukis = "vibe_ukis.main:main"
+
+[tool.hatch.build.targets.wheel]
+only-include = ["src/vibe_ukis", "documentation"]
+packages = ["src/vibe_ukis"]
+
+[tool.hatch.build.targets.wheel.sources]
+"src" = ""
+"documentation" = "vibe_ukis/documentation"
+
+[tool.mypy]
+exclude = [
+  "tests/"
+]
+namespace_packages = true
+explicit_package_bases = true
+disallow_untyped_defs = true
+ignore_missing_imports = true
+python_version = "3.10"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+addopts = [
+  "-s",
+  "-v",
+  "--tb=short"
+]
