@@ -43,7 +43,9 @@ async def test_starter() -> None:
     assert success, "starter() should complete without exceptions for Firecrawl"
 
     # Check that the Cursor rules directory was created
-    assert Path(".cursor/rules").exists(), ".cursor/rules directory should be created for Firecrawl"
+    assert Path(".cursor/rules").exists(), (
+        ".cursor/rules directory should be created for Firecrawl"
+    )
 
     # Clean up
     if Path(".cursor").exists():
@@ -59,7 +61,9 @@ async def test_starter() -> None:
     assert success, "starter() should complete without exceptions for Qdrant"
 
     # Check that the Cursor rules directory was created
-    assert Path(".cursor/rules").exists(), ".cursor/rules directory should be created for Qdrant"
+    assert Path(".cursor/rules").exists(), (
+        ".cursor/rules directory should be created for Qdrant"
+    )
 
     # Clean up
     if Path(".cursor").exists():
@@ -139,7 +143,9 @@ async def test_claude_skills() -> None:
     except Exception as e:
         print(f"Exception occurred for Claude with LlamaIndex: {e}")
         success = False
-    assert success, "starter() should complete without exceptions for Claude Code + LlamaIndex"
+    assert success, (
+        "starter() should complete without exceptions for Claude Code + LlamaIndex"
+    )
     assert Path(".claude/skills").exists(), ".claude/skills directory should be created"
 
     # Clean up
@@ -153,8 +159,12 @@ async def test_claude_skills() -> None:
     except Exception as e:
         print(f"Exception occurred for Claude with Firecrawl: {e}")
         success = False
-    assert success, "starter() should complete without exceptions for Claude Code + Firecrawl"
-    assert Path(".claude/skills").exists(), ".claude/skills directory should be created for Firecrawl"
+    assert success, (
+        "starter() should complete without exceptions for Claude Code + Firecrawl"
+    )
+    assert Path(".claude/skills").exists(), (
+        ".claude/skills directory should be created for Firecrawl"
+    )
 
     # Clean up
     if Path(".claude").exists():
@@ -167,8 +177,12 @@ async def test_claude_skills() -> None:
     except Exception as e:
         print(f"Exception occurred for Claude with Qdrant: {e}")
         success = False
-    assert success, "starter() should complete without exceptions for Claude Code + Qdrant"
-    assert Path(".claude/skills").exists(), ".claude/skills directory should be created for Qdrant"
+    assert success, (
+        "starter() should complete without exceptions for Claude Code + Qdrant"
+    )
+    assert Path(".claude/skills").exists(), (
+        ".claude/skills directory should be created for Qdrant"
+    )
 
     # Clean up
     if Path(".claude").exists():
@@ -189,8 +203,12 @@ async def test_windsurf_rules() -> None:
     except Exception as e:
         print(f"Exception occurred for Windsurf with Firecrawl: {e}")
         success = False
-    assert success, "starter() should complete without exceptions for Windsurf + Firecrawl"
-    assert Path(".windsurf/rules").exists(), ".windsurf/rules directory should be created for Firecrawl"
+    assert success, (
+        "starter() should complete without exceptions for Windsurf + Firecrawl"
+    )
+    assert Path(".windsurf/rules").exists(), (
+        ".windsurf/rules directory should be created for Firecrawl"
+    )
 
     # Clean up
     if Path(".windsurf").exists():
@@ -204,7 +222,9 @@ async def test_windsurf_rules() -> None:
         print(f"Exception occurred for Windsurf with Qdrant: {e}")
         success = False
     assert success, "starter() should complete without exceptions for Windsurf + Qdrant"
-    assert Path(".windsurf/rules").exists(), ".windsurf/rules directory should be created for Qdrant"
+    assert Path(".windsurf/rules").exists(), (
+        ".windsurf/rules directory should be created for Qdrant"
+    )
 
     # Clean up
     if Path(".windsurf").exists():
@@ -225,8 +245,12 @@ async def test_antigravity_rules() -> None:
     except Exception as e:
         print(f"Exception occurred for Antigravity with Firecrawl: {e}")
         success = False
-    assert success, "starter() should complete without exceptions for Antigravity + Firecrawl"
-    assert Path(".antigravity/rules").exists(), ".antigravity/rules directory should be created for Firecrawl"
+    assert success, (
+        "starter() should complete without exceptions for Antigravity + Firecrawl"
+    )
+    assert Path(".antigravity/rules").exists(), (
+        ".antigravity/rules directory should be created for Firecrawl"
+    )
 
     # Clean up
     if Path(".antigravity").exists():
@@ -239,8 +263,12 @@ async def test_antigravity_rules() -> None:
     except Exception as e:
         print(f"Exception occurred for Antigravity with Qdrant: {e}")
         success = False
-    assert success, "starter() should complete without exceptions for Antigravity + Qdrant"
-    assert Path(".antigravity/rules").exists(), ".antigravity/rules directory should be created for Qdrant"
+    assert success, (
+        "starter() should complete without exceptions for Antigravity + Qdrant"
+    )
+    assert Path(".antigravity/rules").exists(), (
+        ".antigravity/rules directory should be created for Qdrant"
+    )
 
     # Clean up
     if Path(".antigravity").exists():
