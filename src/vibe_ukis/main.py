@@ -28,7 +28,7 @@ def main() -> None:
 
     starter_parser = subparsers.add_parser(
         "start",
-        help="start provides your coding agents with up-to-date documentation about LlamaIndex and Chainlit, so that they can build reliable and working applications! You can launch a terminal user interface by running `vibe-ukis start` or you can directly pass your agent (-a, --agent flag) and chosen service (-s, --service flag). If you already have local files and you wish them to be overwritten by the new file you are about to download with start, use the -w, --overwrite flag.",
+        help="start provides your coding agents (Cursor, Windsurf, Claude Code, Antigravity) with up-to-date documentation about LlamaIndex and Chainlit, so that they can build reliable and working applications! You can launch a terminal user interface by running `vibe-ukis start` or you can directly pass your agent (-a, --agent flag) and chosen service (-s, --service flag). If you already have local files and you wish them to be overwritten by the new file you are about to download with start, use the -w, --overwrite flag.",
     )
 
     starter_parser.add_argument(

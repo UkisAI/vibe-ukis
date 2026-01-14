@@ -7,10 +7,11 @@ agent_rules = {
     "Cursor": ".cursor/rules/",  # Directory for rules
     "Claude Code": ".claude/skills/",  # Directory for skills
     "Windsurf": ".windsurf/rules/",  # Directory for rules
+    "Antigravity": ".antigravity/rules/",  # Directory for rules
 }
 
 
-LibraryName = Literal["LlamaIndex", "Chainlit"]
+LibraryName = Literal["LlamaIndex", "Chainlit", "Firecrawl", "Qdrant"]
 
 
 # Use importlib.resources to locate documentation files
@@ -39,4 +40,6 @@ def _get_doc_path(filename: str) -> str:
 services: dict[LibraryName, str] = {
     "LlamaIndex": _get_doc_path("llamaindex.md"),
     "Chainlit": _get_doc_path("chainlit.md"),
+    "Firecrawl": _get_doc_path("firecrawl.md"),
+    "Qdrant": _get_doc_path("qdrant.md"),
 }

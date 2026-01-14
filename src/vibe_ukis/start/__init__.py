@@ -10,6 +10,7 @@ from .mcp_terminal import run_mcp_terminal_interface
 from .skills import create_claude_skills
 from .windsurf import create_windsurf_rules
 from .cursor import create_cursor_rules
+from .antigravity import create_antigravity_rules
 
 
 async def starter(
@@ -123,6 +124,23 @@ async def starter(
                 )
             else:
                 cs.log("[bold yellow]No new rules created (files may already exist)[/]")
+        # Check if this is the Antigravity rules directory
+        elif fl == ".antigravity/rules/":
+            if verbose:
+                cs.log(f"[bold cyan]CREATING ANTIGRAVITY RULES[/]\t{fl}")
+            created = create_antigravity_rules(
+                base_dir=".antigravity",
+                services_content=services_content,
+                overwrite=overwrite_files or False,
+                verbose=verbose,
+            )
+            total_created = sum(len(files) for files in created.values())
+            if total_created > 0:
+                cs.log(
+                    f"[bold green]CREATED ANTIGRAVITY RULES STRUCTURE WITH {total_created} FILE(S)✅[/]"
+                )
+            else:
+                cs.log("[bold yellow]No new rules created (files may already exist)[/]")
         else:
             # Regular file writing for standard agents
             if verbose:
@@ -136,7 +154,7 @@ async def starter(
         "[bold green]SUCCESS✅[/]\tAll the instructions files have been written, happy vibe-coding!"
     )
     cs.log(
-        "[bold yellow]⚠️  IMPORTANT[/]\tPlease restart Cursor/Windsurf/Claude Code for vibe-ukis to start working!"
+        "[bold yellow]⚠️  IMPORTANT[/]\tPlease restart Cursor/Windsurf/Claude Code/Antigravity for vibe-ukis to start working!"
     )
     return ".vibe-ukis/rules/AGENTS.md" in agent_files
 

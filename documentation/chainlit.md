@@ -9,6 +9,8 @@ Chainlit addresses the challenge of building production-grade conversational app
 
 **Official Documentation**: [https://docs.chainlit.io/](https://docs.chainlit.io/)
 
+**Releases & Changelog**: [https://github.com/Chainlit/chainlit/releases](https://github.com/Chainlit/chainlit/releases) - Check here for the latest features and updates
+
 **Cookbook Examples**: [https://github.com/Chainlit/cookbook](https://github.com/Chainlit/cookbook)
 
 ## Installation and Setup
@@ -27,6 +29,54 @@ Verify the installation by running the hello app:
 chainlit hello
 ```
 
+### ##NEW## Installing with uv (STRONGLY Recommended)
+
+**uv** is the modern, blazingly fast Python package manager that replaces pip and Poetry. It's the recommended way to install and manage Chainlit projects.
+
+#### Step 1: Install uv
+
+```bash
+# Windows (PowerShell)
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+
+# macOS/Linux
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+or
+
+```bash
+pip install uv
+```
+
+1. **Fork the Repository**
+   - Visit [https://github.com/Chainlit/chainlit](https://github.com/Chainlit/chainlit)
+   - Click the "Fork" button to create your own copy
+
+2. **Clone Your Fork**
+
+```bash
+# Clone your forked repository
+git clone https://github.com/YOUR-USERNAME/chainlit.git
+cd chainlit
+```
+
+3. **Install and Run with uv**
+
+```bash
+# Navigate to the backend directory
+cd backend
+
+# Install dependencies with uv
+uv sync
+
+# Run Chainlit from source
+uv run chainlit hello
+
+# Run your own app
+uv run chainlit run path/to/your/app.py
+```
+
 ### Forking and Installing from GitHub
 
 **1. Fork the Repository**
@@ -42,15 +92,32 @@ cd chainlit
 
 **3. Install Dependencies**
 
-Create a virtual environment and install dependencies:
+#### ##NEW## Using uv (Recommended)
 
 ```bash
-cd backend;poetry install;poetry self add poetry-plugin-shell;poetry shell;
+cd backend
+uv sync
+uv run chainlit run app.py
+```
+
+#### Using Poetry (Deprecated - Old Method)
+
+**Note:** Poetry is the old dependency manager and is being phased out in favor of uv. Use uv for new projects.
+
+```bash
+cd backend
+poetry install
+poetry self add poetry-plugin-shell
+poetry shell
 ```
 
 **4. Run Chainlit**
 
 ```bash
+# With uv (recommended)
+uv run chainlit run app.py
+
+# With Poetry (deprecated)
 chainlit run app.py
 ```
 

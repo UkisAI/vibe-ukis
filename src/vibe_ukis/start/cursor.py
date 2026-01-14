@@ -20,6 +20,16 @@ RULE_CONFIGS = {
         "rule_title": "Chainlit Framework",
         "rule_description": "Use this for building conversational AI interfaces with Chainlit. Essential for creating chat UIs and interactive AI applications.",
     },
+    "Firecrawl": {
+        "rule_name": "firecrawl",
+        "rule_title": "Web Scraping With Firecrawl",
+        "rule_description": "Use this for web scraping, crawling entire websites, site mapping, and structured data extraction. Essential for gathering data from websites and parsing documents.",
+    },
+    "Qdrant": {
+        "rule_name": "qdrant",
+        "rule_title": "Vector Database With Qdrant",
+        "rule_description": "Use this for vector database operations, semantic search, similarity search with filtering, and managing vector embeddings. Essential for building semantic search and RAG applications.",
+    },
 }
 
 
@@ -146,6 +156,98 @@ You:
 
 *thought* Great! Now I know how to make what the user requested using @cl.on_chat_start, @cl.on_message, and cl.user_session! Let's make it!
 """
+    elif service_name == "Firecrawl":
+        content = f"""---
+description: {config["rule_description"]}
+alwaysApply: false
+---
+
+# {config["rule_title"]}
+
+## Instructions
+
+1. Carefully review [FIRECRAWL_GUIDE.md] to find sections relevant to the task you are trying to accomplish and find relevant URLs.
+
+2. Acquire knowledge necessary for completing the task using relevant URLs from [FIRECRAWL_GUIDE.md] and curl to fetch the content.
+
+3. Look into the [FIRECRAWL_GUIDE.md] AGAIN and see if it has any prebuilt features (like Scrape, Crawl, Map, Search, Extract) that may make the task at hand significantly easier as it offers comprehensive web scraping capabilities.
+
+4. Carefully read your only true source of Firecrawl knowledge, [FIRECRAWL_GUIDE.md] AGAIN and make sure you really understood everything and didn't skip any features that may make the task at hand significantly easier. Also check the official documentation URLs provided in the guide.
+
+5. Complete the required task using ONLY the content from the acquired knowledge.
+
+## Important:
+
+Never use the web search, only use links found IN the guide OR links found by looking inside of links inside of the guide.
+
+Always convert the content of urls to readable format for yourself like this: curl -s https://docs.firecrawl.dev/features/scrape | html2text
+
+## Examples
+
+User: I need to scrape all pages from a website and extract structured data.
+
+You:
+
+*reads [FIRECRAWL_GUIDE.md]* AHA! I found "Crawl" and "Extract" features! I will now fetch the relevant links to understand how to use them.
+
+*thought* The user wants both crawling and extraction! Let me read the guide to see how to combine these features!
+
+*curl* url_for_crawl_here
+
+*thought* Let me check the Extract feature to understand how to get structured data!
+
+*reads [FIRECRAWL_GUIDE.md]*
+
+*curl* url_for_extract_here
+
+*thought* Great! Now I know how to crawl the entire website and extract structured data using Firecrawl! Let's implement it!
+"""
+    elif service_name == "Qdrant":
+        content = f"""---
+description: {config["rule_description"]}
+alwaysApply: false
+---
+
+# {config["rule_title"]}
+
+## Instructions
+
+1. Carefully review [QDRANT_GUIDE.md] to find sections relevant to the task you are trying to accomplish and find relevant URLs.
+
+2. Acquire knowledge necessary for completing the task using relevant URLs from [QDRANT_GUIDE.md] and curl to fetch the content.
+
+3. Look into the [QDRANT_GUIDE.md] AGAIN and see if it has any prebuilt features (like Collections, Search, Filtering, Hybrid Queries, Snapshots) that may make the task at hand significantly easier as Qdrant offers extensive vector database capabilities.
+
+4. Carefully read your only true source of Qdrant knowledge, [QDRANT_GUIDE.md] AGAIN and make sure you really understood everything and didn't skip any features that may make the task at hand significantly easier. Also check the official documentation URLs provided in the guide.
+
+5. Complete the required task using ONLY the content from the acquired knowledge.
+
+## Important:
+
+Never use the web search, only use links found IN the guide OR links found by looking inside of links inside of the guide.
+
+Always convert the content of urls to readable format for yourself like this: curl -s https://qdrant.tech/documentation/concepts/collections/ | html2text
+
+## Examples
+
+User: Create a vector database for semantic search with filtering.
+
+You:
+
+*reads [QDRANT_GUIDE.md]* AHA! I found "Collections", "Search", and "Filtering" sections! I will now fetch the relevant links to understand how to build the system.
+
+*thought* The user needs both semantic search and filtering! Let me read the guide to see how to combine these!
+
+*curl* url_for_search_here
+
+*thought* Let me check the Filtering documentation to see how to add payload filters!
+
+*reads [QDRANT_GUIDE.md]*
+
+*curl* url_for_filtering_here
+
+*thought* Great! Now I know how to create collections, perform similarity search with filters using Qdrant! Let's implement it!
+"""
     else:
         # Generic rule template for other services
         content = f"""---
@@ -213,6 +315,8 @@ def create_cursor_guide(
     guide_filename_map = {
         "LlamaIndex": "LLAMAINDEX_GUIDE.md",
         "Chainlit": "CHAINLIT_GUIDE.md",
+        "Firecrawl": "FIRECRAWL_GUIDE.md",
+        "Qdrant": "QDRANT_GUIDE.md",
     }
 
     guide_filename = guide_filename_map.get(

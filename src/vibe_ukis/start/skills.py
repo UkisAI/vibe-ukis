@@ -21,6 +21,16 @@ SKILL_CONFIGS = {
         "skill_title": "Chainlit Framework",
         "skill_description": "Use this for building conversational AI interfaces with Chainlit. Essential for creating chat UIs and interactive AI applications.",
     },
+    "Firecrawl": {
+        "skill_name": "firecrawl",
+        "skill_title": "Web Scraping With Firecrawl",
+        "skill_description": "Use this for web scraping, crawling entire websites, site mapping, and structured data extraction. Essential for gathering data from websites and parsing documents.",
+    },
+    "Qdrant": {
+        "skill_name": "qdrant",
+        "skill_title": "Vector Database With Qdrant",
+        "skill_description": "Use this for vector database operations, semantic search, similarity search with filtering, and managing vector embeddings. Essential for building semantic search and RAG applications.",
+    },
 }
 
 
@@ -165,6 +175,93 @@ You:
 *reads [LLAMAINDEX_GUIDE.md]*
 *WebFetch* hybrid retrieval, tree summarize
 *thought* Great! Now I know how to make what the user requested using the latest stuff! Let's make it!"""
+    elif service_name == "Chainlit":
+        content = f"""---
+name: {config["skill_title"]}
+description: {config["skill_description"]}
+---
+
+# {config["skill_title"]}
+
+## Instructions
+1. Carefully review [CHAINLIT_GUIDE.md] to find sections relevant to the task you are trying to accomplish and find relevant URLs.
+2. Acquire knowledge necessary for completing the task using relevant URLs from [CHAINLIT_GUIDE.md] and the WebFetch tool.
+3. Look into the [CHAINLIT_GUIDE.md] AGAIN and see if it has any prebuilt components (like lifecycle hooks, elements, actions, widgets) that may make the task at hand significantly easier as Chainlit offers an extensive library of them.
+4. Carefully read your only true source of Chainlit knowledge, [CHAINLIT_GUIDE.md] AGAIN and make sure you really understood everything and didn't skip any prebuilt components that may make the task at hand significantly easier. Also check the official documentation URLs provided in the guide.
+5. Complete the required task using ONLY the content from the acquired knowledge.
+
+## Important:
+
+Never use the web search, only use links found IN the guide OR links found by looking inside of links inside of the guide.
+
+## Examples
+User: Make me a Chainlit chat application with user session management.
+You:
+*reads [CHAINLIT_GUIDE.md]* AHA! I found "User Session" on line 133! I will now fetch the relevant link to understand how to use it.
+*thought* HMM but the user also asked about chat application! Let me read the guide to see how to set up lifecycle hooks!
+*WebFetch* user session management
+*thought* Let me check again to see if there are any lifecycle hooks I should use!
+*reads [CHAINLIT_GUIDE.md]*
+*WebFetch* lifecycle hooks
+*thought* Great! Now I know how to make what the user requested using @cl.on_chat_start, @cl.on_message, and cl.user_session! Let's make it!"""
+    elif service_name == "Firecrawl":
+        content = f"""---
+name: {config["skill_title"]}
+description: {config["skill_description"]}
+---
+
+# {config["skill_title"]}
+
+## Instructions
+1. Carefully review [FIRECRAWL_GUIDE.md] to find sections relevant to the task you are trying to accomplish and find relevant URLs.
+2. Acquire knowledge necessary for completing the task using relevant URLs from [FIRECRAWL_GUIDE.md] and the WebFetch tool.
+3. Look into the [FIRECRAWL_GUIDE.md] AGAIN and see if it has any prebuilt features (like Scrape, Crawl, Map, Search, Extract) that may make the task at hand significantly easier as it offers comprehensive web scraping capabilities.
+4. Carefully read your only true source of Firecrawl knowledge, [FIRECRAWL_GUIDE.md] AGAIN and make sure you really understood everything and didn't skip any features that may make the task at hand significantly easier. Also check the official documentation URLs provided in the guide.
+5. Complete the required task using ONLY the content from the acquired knowledge.
+
+## Important:
+
+Never use the web search, only use links found IN the guide OR links found by looking inside of links inside of the guide.
+
+## Examples
+User: I need to scrape all pages from a website and extract structured data.
+You:
+*reads [FIRECRAWL_GUIDE.md]* AHA! I found "Crawl" and "Extract" features! I will now fetch the relevant links to understand how to use them.
+*thought* The user wants both crawling and extraction! Let me read the guide to see how to combine these features!
+*WebFetch* crawl website
+*thought* Let me check the Extract feature to understand how to get structured data!
+*reads [FIRECRAWL_GUIDE.md]*
+*WebFetch* extract structured data
+*thought* Great! Now I know how to crawl the entire website and extract structured data using Firecrawl! Let's implement it!"""
+    elif service_name == "Qdrant":
+        content = f"""---
+name: {config["skill_title"]}
+description: {config["skill_description"]}
+---
+
+# {config["skill_title"]}
+
+## Instructions
+1. Carefully review [QDRANT_GUIDE.md] to find sections relevant to the task you are trying to accomplish and find relevant URLs.
+2. Acquire knowledge necessary for completing the task using relevant URLs from [QDRANT_GUIDE.md] and the WebFetch tool.
+3. Look into the [QDRANT_GUIDE.md] AGAIN and see if it has any prebuilt features (like Collections, Search, Filtering, Hybrid Queries, Snapshots) that may make the task at hand significantly easier as Qdrant offers extensive vector database capabilities.
+4. Carefully read your only true source of Qdrant knowledge, [QDRANT_GUIDE.md] AGAIN and make sure you really understood everything and didn't skip any features that may make the task at hand significantly easier. Also check the official documentation URLs provided in the guide.
+5. Complete the required task using ONLY the content from the acquired knowledge.
+
+## Important:
+
+Never use the web search, only use links found IN the guide OR links found by looking inside of links inside of the guide.
+
+## Examples
+User: Create a vector database for semantic search with filtering.
+You:
+*reads [QDRANT_GUIDE.md]* AHA! I found "Collections", "Search", and "Filtering" sections! I will now fetch the relevant links to understand how to build the system.
+*thought* The user needs both semantic search and filtering! Let me read the guide to see how to combine these!
+*WebFetch* similarity search
+*thought* Let me check the Filtering documentation to see how to add payload filters!
+*reads [QDRANT_GUIDE.md]*
+*WebFetch* filtering payloads
+*thought* Great! Now I know how to create collections, perform similarity search with filters using Qdrant! Let's implement it!"""
     else:
         # Generic skill template for other services
         content = f"""---
@@ -224,6 +321,8 @@ def create_guide_md(
     guide_filename_map = {
         "LlamaIndex": "LLAMAINDEX_GUIDE.md",
         "Chainlit": "CHAINLIT_GUIDE.md",
+        "Firecrawl": "FIRECRAWL_GUIDE.md",
+        "Qdrant": "QDRANT_GUIDE.md",
     }
 
     guide_filename = guide_filename_map.get(

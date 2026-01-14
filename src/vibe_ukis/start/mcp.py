@@ -123,6 +123,112 @@ def get_chainlit_database() -> str:
     return "# Chainlit Documentation\n\nDocumentation file not found."
 
 
+def get_firecrawl_instructions() -> str:
+    """Generate instructions for using Firecrawl documentation."""
+    return """# Web Scraping With Firecrawl
+
+## Instructions
+
+1. Carefully review [FIRECRAWL_DATABASE] to find sections relevant to the task you are trying to accomplish and find relevant URLs.
+
+2. Acquire knowledge necessary for completing the task using relevant URLs from [FIRECRAWL_DATABASE] and the read_guide_url tool to fetch the content.
+
+3. Look into the [FIRECRAWL_DATABASE] AGAIN and see if it has any prebuilt features (like Scrape, Crawl, Map, Search, Extract) that may make the task at hand significantly easier as it offers comprehensive web scraping capabilities.
+
+4. Carefully read your only true source of Firecrawl knowledge, [FIRECRAWL_DATABASE] AGAIN and make sure you really understood everything and didn't skip any features that may make the task at hand significantly easier. Also check the official documentation URLs provided in the guide.
+
+5. Complete the required task using ONLY the content from the acquired knowledge.
+
+## Important:
+
+- Never use web search, only use links found IN the guide OR links found by looking inside of links inside of the guide
+- ALWAYS use the read_guide_url tool to fetch content from URLs - it provides clean, complete content with preserved code blocks
+- DO NOT use curl, especially not with grep, head, or tail as these will cut off relevant content
+- The read_guide_url tool converts HTML to Markdown, preserving all code blocks and formatting
+
+## Examples
+
+User: I need to scrape all pages from a website and extract structured data.
+
+You:
+
+*calls firecrawl_database* AHA! I found "Crawl" and "Extract" features! I will now fetch the relevant links to understand how to use them.
+
+*thought* The user wants both crawling and extraction! Let me read the guide to see how to combine these features!
+
+*calls read_guide_url with url_for_crawl_here*
+
+*thought* Let me check the Extract feature to understand how to get structured data!
+
+*reads [FIRECRAWL_DATABASE]*
+
+*calls read_guide_url with url_for_extract_here*
+
+*thought* Great! Now I know how to crawl the entire website and extract structured data using Firecrawl! Let's implement it!
+"""
+
+
+def get_qdrant_instructions() -> str:
+    """Generate instructions for using Qdrant documentation."""
+    return """# Vector Database With Qdrant
+
+## Instructions
+
+1. Carefully review [QDRANT_DATABASE] to find sections relevant to the task you are trying to accomplish and find relevant URLs.
+
+2. Acquire knowledge necessary for completing the task using relevant URLs from [QDRANT_DATABASE] and the read_guide_url tool to fetch the content.
+
+3. Look into the [QDRANT_DATABASE] AGAIN and see if it has any prebuilt features (like Collections, Search, Filtering, Hybrid Queries, Snapshots) that may make the task at hand significantly easier as Qdrant offers extensive vector database capabilities.
+
+4. Carefully read your only true source of Qdrant knowledge, [QDRANT_DATABASE] AGAIN and make sure you really understood everything and didn't skip any features that may make the task at hand significantly easier. Also check the official documentation URLs provided in the guide.
+
+5. Complete the required task using ONLY the content from the acquired knowledge.
+
+## Important:
+
+- Never use web search, only use links found IN the guide OR links found by looking inside of links inside of the guide
+- ALWAYS use the read_guide_url tool to fetch content from URLs - it provides clean, complete content with preserved code blocks
+- DO NOT use curl, especially not with grep, head, or tail as these will cut off relevant content
+- The read_guide_url tool converts HTML to Markdown, preserving all code blocks and formatting
+
+## Examples
+
+User: Create a vector database for semantic search with filtering.
+
+You:
+
+*calls qdrant_database* AHA! I found "Collections", "Search", and "Filtering" sections! I will now fetch the relevant links to understand how to build the system.
+
+*thought* The user needs both semantic search and filtering! Let me read the guide to see how to combine these!
+
+*calls read_guide_url with url_for_search_here*
+
+*thought* Let me check the Filtering documentation to see how to add payload filters!
+
+*reads [QDRANT_DATABASE]*
+
+*calls read_guide_url with url_for_filtering_here*
+
+*thought* Great! Now I know how to create collections, perform similarity search with filters using Qdrant! Let's implement it!
+"""
+
+
+def get_firecrawl_database() -> str:
+    """Load Firecrawl documentation content."""
+    firecrawl_path = DOCS_DIR / "firecrawl.md"
+    if firecrawl_path.exists():
+        return firecrawl_path.read_text(encoding="utf-8")
+    return "# Firecrawl Documentation\n\nDocumentation file not found."
+
+
+def get_qdrant_database() -> str:
+    """Load Qdrant documentation content."""
+    qdrant_path = DOCS_DIR / "qdrant.md"
+    if qdrant_path.exists():
+        return qdrant_path.read_text(encoding="utf-8")
+    return "# Qdrant Documentation\n\nDocumentation file not found."
+
+
 @mcp_server.tool(
     name="how_to_llamaindex",
     description=(
@@ -187,10 +293,74 @@ def chainlit_database() -> str:
 
 
 @mcp_server.tool(
+    name="how_to_firecrawl",
+    description=(
+        "Returns instructions and best practices for using the Firecrawl documentation effectively. "
+        "Call this tool FIRST when starting any Firecrawl-related task to understand the proper workflow. "
+        "This provides step-by-step guidance on how to read and use the firecrawl_database tool. "
+        "Returns: Markdown-formatted instructions with examples showing the correct approach to using Firecrawl for web scraping."
+    ),
+)
+def how_to_firecrawl() -> str:
+    """Get instructions for using Firecrawl documentation."""
+    return get_firecrawl_instructions()
+
+
+@mcp_server.tool(
+    name="firecrawl_database",
+    description=(
+        "Returns the complete Firecrawl documentation database containing comprehensive information about: "
+        "web scraping (Scrape), crawling entire websites (Crawl), site mapping (Map), web search (Search), "
+        "structured data extraction (Extract), PDF/document parsing, custom headers, authentication, "
+        "mobile emulation, JavaScript-heavy sites, and integrations with LangChain, LlamaIndex, CrewAI. "
+        "Call this tool AFTER reading how_to_firecrawl to access the full documentation. "
+        "Use this as your primary source of truth for ALL Firecrawl implementation details. "
+        "Contains 5,000+ characters of documentation with URLs to official resources. "
+        "Returns: Complete Firecrawl documentation in markdown format."
+    ),
+)
+def firecrawl_database() -> str:
+    """Get complete Firecrawl documentation."""
+    return get_firecrawl_database()
+
+
+@mcp_server.tool(
+    name="how_to_qdrant",
+    description=(
+        "Returns instructions and best practices for using the Qdrant documentation effectively. "
+        "Call this tool FIRST when starting any Qdrant-related task to understand the proper workflow. "
+        "This provides step-by-step guidance on how to read and use the qdrant_database tool. "
+        "Returns: Markdown-formatted instructions with examples showing the correct approach to building Qdrant vector search applications."
+    ),
+)
+def how_to_qdrant() -> str:
+    """Get instructions for using Qdrant documentation."""
+    return get_qdrant_instructions()
+
+
+@mcp_server.tool(
+    name="qdrant_database",
+    description=(
+        "Returns the complete Qdrant documentation database containing comprehensive information about: "
+        "collections, points, vectors (dense/sparse/multi-vectors), payload, similarity search, filtered search, "
+        "hybrid queries, filtering, inference, indexing (HNSW), storage, snapshots, optimization, "
+        "distributed deployment, quantization, multitenancy, FastEmbed integration, and security. "
+        "Call this tool AFTER reading how_to_qdrant to access the full documentation. "
+        "Use this as your primary source of truth for ALL Qdrant implementation details. "
+        "Contains 10,000+ characters of documentation with URLs to official resources. "
+        "Returns: Complete Qdrant documentation in markdown format."
+    ),
+)
+def qdrant_database() -> str:
+    """Get complete Qdrant documentation."""
+    return get_qdrant_database()
+
+
+@mcp_server.tool(
     name="read_guide_url",
     description=(
         "Fetches and extracts clean text content from a given URL, converting HTML to Markdown. "
-        "Use this tool to read documentation pages, guides, or articles referenced in the LlamaIndex or Chainlit databases. "
+        "Use this tool to read documentation pages, guides, or articles referenced in the LlamaIndex, Chainlit, Firecrawl, or Qdrant databases. "
         "The tool uses html2text to convert HTML to Markdown while preserving code blocks, formatting, and structure. "
         "This is the RECOMMENDED way to fetch content from URLs found in the documentation databases. "
         "DO NOT use curl with grep or head/tail - use this tool instead for clean, complete content extraction. "

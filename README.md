@@ -5,7 +5,7 @@
 ## Features
 
 - **Claude Code Skills**: Extensible skills framework for adding custom capabilities to Claude Code agents
-- **Cursor & Windsurf Rules**: Auto-generated configuration rules for Cursor and Windsurf coding assistants
+- **Cursor, Windsurf & Antigravity Rules**: Auto-generated configuration rules for Cursor, Windsurf, and Antigravity coding assistants
 - **MCP Server Support**: Model Context Protocol servers providing standardized documentation access for AI coding assistants
 
 ## Quick Start
@@ -28,9 +28,9 @@ or if you want to run as a mcp server
 ```bash
 vibe-ukis mcp
 ```
-This will open an interactive terminal UI that guides you through setting up your coding agent (Cursor, Windsurf, or Claude Code) with up-to-date documentation for LlamaIndex and Chainlit.
+This will open an interactive terminal UI that guides you through setting up your coding agent (Cursor, Windsurf, Claude Code, or Antigravity) with up-to-date documentation for LlamaIndex and Chainlit.
 
-**⚠️ Important:** After running `vibe-ukis start` or `vibe-ukis run`, restart your editor (Cursor/Windsurf/Claude Code) for the changes to take effect!
+**⚠️ Important:** After running `vibe-ukis start` or `vibe-ukis run`, restart your editor (Cursor/Windsurf/Claude Code/Antigravity) for the changes to take effect!
 
 ## Installation
 
@@ -84,12 +84,12 @@ pip install -e .
 
 ### start
 
-The `start` command sets up your coding agent with the latest LlamaIndex and Chainlit documentation. It creates agent-specific configuration files (rules for Cursor/Windsurf, skills for Claude Code) that enable your AI assistant to build reliable applications.
+The `start` command sets up your coding agent with the latest LlamaIndex and Chainlit documentation. It creates agent-specific configuration files (rules for Cursor/Windsurf/Antigravity, skills for Claude Code) that enable your AI assistant to build reliable applications.
 
 **Features:**
 - Interactive terminal UI for easy setup
 - Up-to-date documentation from LlamaIndex and Chainlit
-- Support for multiple coding agents (Cursor, Windsurf, Claude Code)
+- Support for multiple coding agents (Cursor, Windsurf, Claude Code, Antigravity)
 - Creates agent-specific configuration files automatically
 
 **Example usage:**
@@ -102,7 +102,7 @@ vibe-ukis start -v                     # Verbose mode for detailed logging
 ```
 
 **Flags:**
-- `-a`/`--agent`: Specify coding agent (`Cursor`, `Windsurf`, or `Claude Code`)
+- `-a`/`--agent`: Specify coding agent (`Cursor`, `Windsurf`, `Claude Code`, or `Antigravity`)
 - `-s`/`--service`: Specify service to configure (`LlamaIndex` or `Chainlit`)
 - `-v`/`--verbose`: Enable detailed logging
 
